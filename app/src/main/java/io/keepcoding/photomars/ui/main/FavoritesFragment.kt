@@ -7,20 +7,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.keepcoding.photomars.R
+import io.keepcoding.photomars.base.BasePhotoMars
 
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BasePhotoMars.BaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+    companion object {
+        const val TAG = "Favorites fragment"
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(getXmlLayout(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initValues()
+        initListeners()
+
+    }
+
+    override fun getXmlLayout(): Int {
+        return R.layout.fragment_favorites
+    }
+
+    override fun initValues() {
+
+    }
+
+    override fun initListeners() {
 
     }
 }
