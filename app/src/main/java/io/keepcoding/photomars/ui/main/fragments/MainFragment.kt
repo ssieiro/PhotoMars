@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.keepcoding.photomars.R
-import io.keepcoding.photomars.base.BasePhotoMars
 import io.keepcoding.photomars.repository.model.PhotoMarsResponse
 import io.keepcoding.photomars.repository.model.PhotosItem
 import io.keepcoding.photomars.repository.network.PhotoMarsService
@@ -21,11 +21,10 @@ import kotlinx.android.synthetic.main.item_list.*
 import retrofit2.Response
 
 
-class MainFragment() : BasePhotoMars.BaseFragment(), CallbackItemClick {
+class MainFragment() : Fragment(), CallbackItemClick {
 
     private var mPhotos: List<PhotosItem?>? = null
     private var mAdapter: MainAdapter? = null
-    private var mContext: Context? = null
 
     private val mViewModel: MainFragmentViewModel by lazy {
         val factory = CustomViewModelFactory(requireActivity().application)
@@ -34,43 +33,34 @@ class MainFragment() : BasePhotoMars.BaseFragment(), CallbackItemClick {
 
     companion object {
         const val TAGSERVER = "SERVER PHOTO"
+        fun newInstance() = MainFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getXmlLayout(), container, false)
+        return inflater.inflate(R.layout.fragment_main, container, false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initValues()
-        initListeners()
+        init()
         getPhotos()
     }
 
-    override fun onResume() {
-        super.onResume()
-        mContext = context
-
-    }
-
-    override fun getXmlLayout(): Int {
-        return R.layout.fragment_main
-    }
-
-    override fun initValues() {
+    private fun init() {
         recyclerViewList.layoutManager = LinearLayoutManager(activity)
         recyclerViewList.isNestedScrollingEnabled = false
         recyclerViewList.setHasFixedSize(false)
     }
 
-    override fun initListeners() {
+    override fun onResume() {
+        super.onResume()
     }
+
 
     private fun getPhotos() {
         mViewModel.getAllPhotos(object : PhotoMarsService.CallbackResponse<PhotoMarsResponse> {
             override fun onResponse(response: PhotoMarsResponse) {
-
                 mPhotos = response.photos
                 mAdapter = MainAdapter(requireContext(), MainFragment(), mPhotos)
                 recyclerViewList.adapter = mAdapter
@@ -82,7 +72,7 @@ class MainFragment() : BasePhotoMars.BaseFragment(), CallbackItemClick {
     }
 
     override fun onItemClick(photo: PhotosItem) {
-        mContext?.let { fragment ->
+        activity?.let { fragment ->
             val intent = Intent(fragment, DetailActivity::class.java).apply {
                 arguments = Bundle().apply {
                     putSerializable(OBJECT_PHOTO, photo)

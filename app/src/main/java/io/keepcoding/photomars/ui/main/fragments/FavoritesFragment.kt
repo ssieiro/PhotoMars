@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.keepcoding.photomars.R
-import io.keepcoding.photomars.base.BasePhotoMars
 import io.keepcoding.photomars.repository.model.PhotoMarsResponse
 import io.keepcoding.photomars.repository.model.PhotosItem
 import io.keepcoding.photomars.repository.network.PhotoMarsService
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.item_list.*
 import retrofit2.Response
 
 
-class FavoritesFragment() : BasePhotoMars.BaseFragment(), CallbackItemClick {
+class FavoritesFragment() : Fragment(), CallbackItemClick {
 
     private var mPhotos: List<PhotosItem?>? = null
     private var mAdapter: FavoritesAdapter? = null
@@ -32,31 +32,20 @@ class FavoritesFragment() : BasePhotoMars.BaseFragment(), CallbackItemClick {
 
     companion object {
         const val TAGLOCAL = "LOCAL PHOTO"
+        fun newInstance() = FavoritesFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getXmlLayout(), container, false)
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initValues()
-        initListeners()
-        getPhotos()
-    }
-
-    override fun getXmlLayout(): Int {
-        return R.layout.fragment_main
-    }
-
-    override fun initValues() {
         recyclerViewList.layoutManager = LinearLayoutManager(activity)
         recyclerViewList.isNestedScrollingEnabled = false
         recyclerViewList.setHasFixedSize(false)
-    }
-
-    override fun initListeners() {
+        getPhotos()
     }
 
 
