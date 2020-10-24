@@ -61,7 +61,7 @@ class MainFragment() : Fragment(), CallbackItemClick {
         mViewModel.getAllPhotos(object : PhotoMarsService.CallbackResponse<PhotoMarsResponse> {
             override fun onResponse(response: PhotoMarsResponse) {
                 mPhotos = response.photos
-                mAdapter = MainAdapter(requireContext(), MainFragment(), mPhotos)
+                mAdapter = MainAdapter(requireActivity().applicationContext, this@MainFragment, mPhotos)
                 recyclerViewList.adapter = mAdapter
             }
             override fun onFailure(t: Throwable, res: Response<*>?) {
@@ -70,7 +70,7 @@ class MainFragment() : Fragment(), CallbackItemClick {
     }
 
     override fun onItemClick(photo: PhotosItem) {
-        activity?.let { fragment ->
+        context?.let { fragment ->
             val intent = Intent(fragment, DetailActivity::class.java).apply {
                 arguments = Bundle().apply {
                     putSerializable(OBJECT_PHOTO, photo)

@@ -22,13 +22,17 @@ class DetailActivity : AppCompatActivity() {
         const val REQUEST_CODE = 100
     }
 
+    private val mViewModel: DetailViewModel by lazy {
+        val factory = CustomViewModelFactory(application)
+        ViewModelProvider(this, factory).get(DetailViewModel::class.java)
+    }
+
     private var mPhoto: PhotosItem? = null
     private var localPhoto = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        setSupportActionBar(findViewById(R.id.toolbar))
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -59,11 +63,6 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
 
-    }
-
-    private val mViewModel: DetailViewModel by lazy {
-        val factory = CustomViewModelFactory(application)
-        ViewModelProvider(this, factory).get(DetailViewModel::class.java)
     }
 
 
