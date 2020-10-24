@@ -2,20 +2,16 @@ package io.keepcoding.photomars.ui.detail
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
+
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.keepcoding.photomars.R
+import io.keepcoding.photomars.repository.db.PhotoMarsRoomDb
 import io.keepcoding.photomars.repository.model.PhotosItem
-import io.reactivex.Completable
-import kotlinx.android.synthetic.main.activity_detail.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class DetailViewModel(private val context: Application) : ViewModel() {
 
@@ -29,4 +25,13 @@ class DetailViewModel(private val context: Application) : ViewModel() {
                 )
                 .into(imageDetail)
     }
+
+    fun deletePhoto(photo: PhotosItem?) {
+        PhotoMarsRoomDb.getInstance(context).photoMarsDao().deletePhoto(photo)
+    }
+
+    fun insertPhoto(photo: PhotosItem?) {
+        PhotoMarsRoomDb.getInstance(context).photoMarsDao().insertPhoto(photo)
+    }
+
 }

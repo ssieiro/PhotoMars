@@ -17,7 +17,6 @@ import io.keepcoding.photomars.ui.detail.DetailActivity
 import io.keepcoding.photomars.ui.detail.DetailActivity.Companion.OBJECT_PHOTO
 import io.keepcoding.photomars.utils.CustomViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.item_list.*
 import retrofit2.Response
 
 

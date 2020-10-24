@@ -9,16 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.keepcoding.photomars.R
-import io.keepcoding.photomars.repository.model.PhotoMarsResponse
 import io.keepcoding.photomars.repository.model.PhotosItem
-import io.keepcoding.photomars.repository.network.PhotoMarsService
 import io.keepcoding.photomars.ui.detail.DetailActivity
 import io.keepcoding.photomars.ui.detail.DetailActivity.Companion.OBJECT_PHOTO
 import io.keepcoding.photomars.utils.CustomViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.item_list.*
-import retrofit2.Response
-
 
 class FavoritesFragment() : Fragment(), CallbackItemClick {
 

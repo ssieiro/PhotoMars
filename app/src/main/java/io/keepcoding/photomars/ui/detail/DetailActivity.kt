@@ -1,15 +1,17 @@
 package io.keepcoding.photomars.ui.detail
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.keepcoding.photomars.R
 import io.keepcoding.photomars.repository.model.PhotosItem
 import io.keepcoding.photomars.utils.CustomViewModelFactory
+import io.reactivex.Completable
+import io.reactivex.CompletableObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -33,6 +35,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        val actionbar = supportActionBar
+        actionbar?.title = "Detalle"
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -41,6 +48,8 @@ class DetailActivity : AppCompatActivity() {
         intent?.let {
 
             mPhoto = intent.extras!!.getSerializable(OBJECT_PHOTO) as PhotosItem?
+            var date = mPhoto?.earthDate
+            txtDescription.text = "Fecha: $date"
             mViewModel.showPhoto(this@DetailActivity, txtDescription, imageDetail, mPhoto!!)
 
             if (it.getStringExtra("EXTRA_PHOTO") == LOCAL_PHOTO) {
@@ -55,9 +64,24 @@ class DetailActivity : AppCompatActivity() {
         btnPhotoDetail.setOnClickListener {
 
             if (localPhoto) {
-                //delete photo
+                mViewModel.deletePhoto(mPhoto)
+
             } else {
-                //include photo in favorites
+                Completable.fromAction {
+                    mViewModel.insertPhoto(mPhoto)
+                }.observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object : CompletableObserver {
+                            override fun onComplete() {
+                                Log.w(TAG, "Insert OK")
+                            }
+                            override fun onSubscribe(d: Disposable) {
+                                Log.w(TAG, "Subscribe OK")
+                            }
+
+                            override fun onError(e: Throwable) {
+                                Log.w(TAG, e.printStackTrace().toString())
+                            }
+                        })
             }
 
             finish()
@@ -65,6 +89,10 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
     override fun onResume() {
         super.onResume()

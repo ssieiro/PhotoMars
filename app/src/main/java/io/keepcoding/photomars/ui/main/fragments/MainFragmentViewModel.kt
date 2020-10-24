@@ -1,7 +1,6 @@
 package io.keepcoding.photomars.ui.main.fragments
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import io.keepcoding.photomars.repository.db.PhotoMarsRoomDb
 import io.keepcoding.photomars.repository.model.PhotoMarsResponse
@@ -18,7 +17,7 @@ class MainFragmentViewModel(private val context: Application) : ViewModel() {
         PhotoMarsService().photoMarsApi.getResponse(ApiKey.API_KEY).enqueue(object : Callback<PhotoMarsResponse> {
             override fun onResponse(call: Call<PhotoMarsResponse>, response: Response<PhotoMarsResponse>) {
                 if (response.isSuccessful && response.body() != null) {
-                    insertInDB(response.body()!!.photos!!)
+                    //insertInDB(response.body()!!.photos!!)
                     cb.onResponse(response.body()!!)
                 } else {
                     cb.onFailure(Throwable(response.message()), response)
