@@ -1,16 +1,16 @@
 package io.keepcoding.photomars.ui.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import io.keepcoding.photomars.R
 import io.keepcoding.photomars.base.BasePhotoMars
-import io.keepcoding.photomars.repository.model.PhotoMarsResponse
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BasePhotoMars.BaseActivity() {
 
+    companion object {
+        const val TAGEXPORE = "Explore"
+        const val TAGFAVORITES = "Favorites"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +21,8 @@ class MainActivity : BasePhotoMars.BaseActivity() {
         initListeners()
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(MainFragment(), "Explore")
-        adapter.addFragment(FavoritesFragment(), "Favorites")
+        adapter.addFragment(MainFragment(tab = TAGEXPORE), "Explore")
+        adapter.addFragment(MainFragment(tab = TAGFAVORITES), "Favorites")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 

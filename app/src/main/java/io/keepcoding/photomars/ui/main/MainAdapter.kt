@@ -25,16 +25,17 @@ class MainAdapter(private val context: Context, private val callbackItemClick: C
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         photosList?.get(position).let { photo ->
-            holder.view.textCardView.text = photo?.camera?.fullName
+            var camera = photo?.camera?.fullName
+            holder.view.textCardView.text = "Camera: $camera"
             Glide.with(context)
                     .load(photo?.imgSrc)
                     .apply(
                             RequestOptions()
-                                    .placeholder(R.drawable.ic_launcher_background)
+                                    .placeholder(R.drawable.placeholder)
                     )
                     .into(holder.view.imageCardView)
 
-            holder.view.carView.setOnClickListener {
+            holder.view.cardView.setOnClickListener {
                 callbackItemClick.onItemClick(photo!!)
             }
 
