@@ -18,28 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/imageCardView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
-            <TextView
-                android:id="@+id/textCardView"
-                android:padding="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:gravity="center"
-                tools:text="Camera"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                />
-        </LinearLayout>
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
 
     </androidx.cardview.widget.CardView>
 

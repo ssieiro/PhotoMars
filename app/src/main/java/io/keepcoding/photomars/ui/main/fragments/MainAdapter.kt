@@ -25,8 +25,6 @@ class MainAdapter(private val context: Context, private val callbackItemClick: C
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         photosList?.get(position).let { photo ->
-            var camera = photo?.camera?.fullName
-            holder.view.textCardView.text = "Camera: $camera"
             Glide.with(context)
                     .load(photo?.imgSrc)
                     .apply(

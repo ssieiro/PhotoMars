@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.content, MainFragment.newInstance())
+                .add(R.id.content, MainFragment.newInstance())
                 .commitNow()
 
         BtnExplore.setOnClickListener {
@@ -31,6 +31,4 @@ class MainActivity : AppCompatActivity() {
                     .commit()
         }
     }
-
-
 }

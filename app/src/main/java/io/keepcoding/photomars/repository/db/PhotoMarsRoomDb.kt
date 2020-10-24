@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import io.keepcoding.photomars.repository.model.PhotosItem
 
-/*
+
 @Database(entities = [PhotosItem::class], version = 1, exportSchema = false)
 abstract class PhotoMarsRoomDb : RoomDatabase() {
 
@@ -32,5 +32,3 @@ abstract class PhotoMarsRoomDb : RoomDatabase() {
         }
     }
 }
-
- */

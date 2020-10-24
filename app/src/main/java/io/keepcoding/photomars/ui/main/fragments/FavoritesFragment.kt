@@ -45,20 +45,15 @@ class FavoritesFragment() : Fragment(), CallbackItemClick {
         recyclerViewList.layoutManager = LinearLayoutManager(activity)
         recyclerViewList.isNestedScrollingEnabled = false
         recyclerViewList.setHasFixedSize(false)
-        getPhotos()
+        getLocalPhotos()
     }
 
 
-    private fun getPhotos() {
-        mViewModel.getAllPhotos(object : PhotoMarsService.CallbackResponse<PhotoMarsResponse> {
-            override fun onResponse(response: PhotoMarsResponse) {
-                mPhotos = response.photos
-                mAdapter = FavoritesAdapter(requireContext(), FavoritesFragment(), mPhotos)
-                recyclerViewList.adapter = mAdapter
-            }
-            override fun onFailure(t: Throwable, res: Response<*>?) {
-                textCardView.text = res.toString()
-            }
+    private fun getLocalPhotos() {
+        mViewModel.getLocalPhotos().observe(viewLifecycleOwner, { photosList ->
+
+            mAdapter = FavoritesAdapter(requireActivity().applicationContext, this, photosList)
+            recyclerViewList.adapter = mAdapter
         })
     }
 

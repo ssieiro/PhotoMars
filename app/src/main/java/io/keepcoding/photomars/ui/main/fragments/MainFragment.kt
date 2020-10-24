@@ -57,7 +57,6 @@ class MainFragment() : Fragment(), CallbackItemClick {
         super.onResume()
     }
 
-
     private fun getPhotos() {
         mViewModel.getAllPhotos(object : PhotoMarsService.CallbackResponse<PhotoMarsResponse> {
             override fun onResponse(response: PhotoMarsResponse) {
@@ -66,7 +65,6 @@ class MainFragment() : Fragment(), CallbackItemClick {
                 recyclerViewList.adapter = mAdapter
             }
             override fun onFailure(t: Throwable, res: Response<*>?) {
-                textCardView.text = res.toString()
             }
         })
     }

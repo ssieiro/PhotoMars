@@ -25,8 +25,6 @@ class FavoritesAdapter(private val context: Context, private val callbackItemCli
 
     override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
         photosList?.get(position).let { photo ->
-            var camera = photo?.camera?.fullName
-            holder.view.textCardView.text = camera
             Glide.with(context)
                     .load(photo?.imgSrc)
                     .apply(

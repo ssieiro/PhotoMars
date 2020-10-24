@@ -22,8 +22,6 @@ class DetailViewModel(private val context: Application) : ViewModel() {
 
     fun showPhoto(context: Activity, txtDescription: TextView, imageDetail: ImageView, photo: PhotosItem) {
 
-        txtDescription.text = photo.camera?.fullName
-
         Glide.with(context)
                 .load(photo.imgSrc)
                 .apply(
