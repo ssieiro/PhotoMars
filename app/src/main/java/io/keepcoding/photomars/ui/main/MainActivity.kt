@@ -3,6 +3,8 @@ package io.keepcoding.photomars.ui.main
 import android.os.Bundle
 import io.keepcoding.photomars.R
 import io.keepcoding.photomars.base.BasePhotoMars
+import io.keepcoding.photomars.ui.main.fragments.FavoritesFragment
+import io.keepcoding.photomars.ui.main.fragments.MainFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BasePhotoMars.BaseActivity() {
@@ -21,8 +23,8 @@ class MainActivity : BasePhotoMars.BaseActivity() {
         initListeners()
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(MainFragment(tab = TAGEXPORE), "Explore")
-        adapter.addFragment(MainFragment(tab = TAGFAVORITES), "Favorites")
+        adapter.addFragment(MainFragment(), "Explore")
+        adapter.addFragment(FavoritesFragment(), "Favorites")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 

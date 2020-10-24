@@ -1,4 +1,4 @@
-package io.keepcoding.photomars.ui.main
+package io.keepcoding.photomars.ui.main.fragments
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -27,7 +27,6 @@ class MainFragmentViewModel(private val context: Application) : ViewModel() {
             }
         })
     }
-
 
 
 }

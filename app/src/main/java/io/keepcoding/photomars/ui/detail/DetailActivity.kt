@@ -19,8 +19,8 @@ class DetailActivity : BasePhotoMars.BaseActivity() {
 
     companion object {
         const val TAG = "DetailActivity"
-        const val LOCAL_PHOTO = "SERVER PHOTO"
-        const val SERVER_PHOTO = "LOCAL PHOTO"
+        const val LOCAL_PHOTO = "LOCAL PHOTO"
+        const val SERVER_PHOTO = "SERVER PHOTO"
         const val OBJECT_PHOTO = "OBJECT_PHOTO"
         const val REQUEST_CODE = 100
     }

@@ -1,4 +1,4 @@
-package io.keepcoding.photomars.ui.main
+package io.keepcoding.photomars.ui.main.fragments
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,18 +12,18 @@ import io.keepcoding.photomars.repository.model.PhotosItem
 import kotlinx.android.synthetic.main.item_list.view.*
 
 
-class MainAdapter(private val context: Context, private val callbackItemClick: CallbackItemClick, private val photosList: List<PhotosItem?>?) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
+class FavoritesAdapter(private val context: Context, private val callbackItemClick: CallbackItemClick, private val photosList: List<PhotosItem?>?) : RecyclerView.Adapter<FavoritesAdapter.FavoritesHolder>() {
 
-    class MainHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class FavoritesHolder(v: View) : RecyclerView.ViewHolder(v) {
         internal var view = v
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
-        return MainHolder(view)
+        return FavoritesHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
         photosList?.get(position).let { photo ->
             var camera = photo?.camera?.fullName
             holder.view.textCardView.text = "Camera: $camera"

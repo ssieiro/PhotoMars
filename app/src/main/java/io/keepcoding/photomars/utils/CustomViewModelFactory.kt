@@ -3,7 +3,8 @@ package io.keepcoding.photomars.utils
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.keepcoding.photomars.ui.main.MainFragmentViewModel
+import io.keepcoding.photomars.ui.main.fragments.FavoritesViewModel
+import io.keepcoding.photomars.ui.main.fragments.MainFragmentViewModel
 import java.lang.IllegalArgumentException
 
 class CustomViewModelFactory(private val application: Application) :
@@ -13,6 +14,7 @@ class CustomViewModelFactory(private val application: Application) :
         return with(modelClass) {
             when {
                 isAssignableFrom(MainFragmentViewModel::class.java) -> MainFragmentViewModel(application)
+                isAssignableFrom(FavoritesViewModel::class.java) -> FavoritesViewModel(application)
                 //isAssignableFrom(DetailViewModel::class.java) -> DetailViewModel(application)
                 else -> throw IllegalArgumentException("Unknown ViewModel")
             }
